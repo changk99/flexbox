@@ -1032,6 +1032,18 @@
         return span
       }
 
+      _createControlRemoveItem(ele) {
+        const span = document.createElement("span")
+        span.innerHTML = "减少成员"
+        span.classList.add("contorler-button")
+        span.onclick = () => {
+          if (ele.lastElementChild) {
+            ele.removeChild(ele.lastElementChild)
+          }
+        }
+        return span
+      }
+
       _createControlAddInlineText(ele) {
         const span = document.createElement("span")
         span.innerHTML = "增加内联文本"
@@ -1148,6 +1160,7 @@
           div.appendChild(ele)
         }
         div.appendChild(this._createControlAddItem(this.ele))
+        div.appendChild(this._createControlRemoveItem(this.ele))
         div.appendChild(this._createControlAddInlineText(this.ele))
         this.wrapper.insertBefore(div, this.wrapper.firstElementChild)
       }
