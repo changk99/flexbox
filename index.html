@@ -7,6 +7,17 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="renderer" content="webkit" />
+  <script>
+    // 百度统计
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a82ada90fd796aed5c551f3d5f6491eb";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    
   <title>flexbox各个属性</title>
   <style>
     body {
@@ -800,7 +811,7 @@
             return prefixes[i] + prefPropertype
           }
         }
-        return false
+        alert('${propertype} 属性不支持, 用其他浏览器试试')
       }
 
       _camelize(style) {
@@ -1144,7 +1155,7 @@
           "justifyContent",
           "alignItems",
           "alignContent",
-          "flexFlow"
+          "flexFlow",
         ]
       ) {
         const div = document.createElement("div")
@@ -1347,8 +1358,6 @@
         let x = e.clientX - rectBounding.left
         let y = e.clientY - rectBounding.top
         div.onmousemove = function (e) {
-          let clientX = e.clientX
-          let clientY = e.clientY
           let pageX = e.pageX
           let pageY = e.pageY
           itemController._setStyle(div, 'top', pageY - y + 'px')
@@ -1367,4 +1376,4 @@
   </script>
 </body>
 
-</html>
+</html> 
