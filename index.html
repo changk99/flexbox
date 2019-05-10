@@ -10,19 +10,23 @@
   <script>
     // 百度统计
     var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?a82ada90fd796aed5c551f3d5f6491eb";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
-    
+    (function () {
+      var hm = document.createElement("script")
+      hm.src = "https://hm.baidu.com/hm.js?a82ada90fd796aed5c551f3d5f6491eb"
+      var s = document.getElementsByTagName("script")[0]
+      s.parentNode.insertBefore(hm, s)
+    })()
+  </script>
+
   <title>flexbox各个属性</title>
   <style>
     body {
       margin: 0;
       padding: 0;
+    }
+
+    select {
+      outline-style: none
     }
 
     .wrapper {
@@ -128,7 +132,6 @@
       cursor: pointer;
       outline-style: none;
     }
-
 
     .item-controller .contorler-number-input input,
     .item-controller .contorler-input input {
@@ -729,7 +732,7 @@
   <!-- flex： none -->
   <div class="wrapper">
     <h1>flex：none</h1>
-    <div class="container flex" style="">
+    <div class="container flex">
       <div class="item" style="flex: none">1</div>
       <div class="item" style="flex: none">2</div>
       <div class="item" style="flex: none">3</div>
@@ -792,6 +795,48 @@
     </div>
   </div>
 
+  <!-- test -->
+  <div class="wrapper">
+    <h1>test</h1>
+    <style>
+      .container {
+        display: flex;
+        background-color: #915151;
+      }
+
+      .item {
+        /* height: 80px; */
+        text-align: center;
+        background-color: rgb(214, 120, 52);
+        border-radius: 1em;
+        border: 5px solid #000;
+        /* text-align: left; */
+        /* margin: 15px; */
+        /* padding: 10px */
+      }
+    </style>
+    <div class="container">
+      <div class="item" style="flex-shrink: 1;width: 100px; flex-basis: 500px">
+        <div style="width: 40px"></div>
+      </div>
+      <div class="item" style="flex-shrink: 0; width: 250px; flex-basis: 300px">
+        <div style="width: 300px"></div>
+      </div>
+      <div class="item" style="flex-shrink: 2; flex-basis: 500px">
+        <div></div>
+      </div>
+      <div class="item" style="flex-shrink: 2;  width: 400px">
+        <div></div>
+      </div>
+      <div class="item" style="flex-shrink: 2;">
+        <div style="font-family: monospace;">12345678910111213141516</div>
+      </div>
+      <div class="item" style="flex-shrink: 3; width: 300px;">
+        <div style="width: 100px"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Controller
     class Controller {
@@ -811,7 +856,7 @@
             return prefixes[i] + prefPropertype
           }
         }
-        alert('${propertype} 属性不支持, 用其他浏览器试试')
+        alert(`${propertype} 属性不支持, 用其他浏览器试试`)
       }
 
       _camelize(style) {
@@ -888,40 +933,40 @@
       }
 
       _createControlInput(ele, propertype) {
-        const li = document.createElement('li')
-        const label = document.createElement('label')
-        const input = document.createElement('input')
+        const li = document.createElement("li")
+        const label = document.createElement("label")
+        const input = document.createElement("input")
         let value = this._getStyle(ele, propertype)
         input.value = value
-        label.textContent = propertype + ' :'
-        li.classList.add('contorler-input')
+        label.textContent = propertype + " :"
+        li.classList.add("contorler-input")
         li.appendChild(label)
         li.appendChild(input)
         return li
       }
 
       _createControlNumberInput(ele, propertype) {
-        const li = document.createElement('li')
-        const label = document.createElement('label')
-        const input = document.createElement('input')
+        const li = document.createElement("li")
+        const label = document.createElement("label")
+        const input = document.createElement("input")
         let value = this._getStyle(ele, propertype)
         let match = value.toString().match(/([.\d]*)(.*)/)
-        input.type = 'number'
+        input.type = "number"
         if (!match[1]) {
-          input.type = 'text'
+          input.type = "text"
           input.value = match[2]
         } else {
           input.value = match[1]
         }
-        let units = ['auto', '%', 'em', 'px', 'rem', 'ex']
-        label.textContent = propertype + ' :'
-        li.classList.add('contorler-number-input')
+        let units = ["auto", "%", "em", "px", "rem", "ex"]
+        label.textContent = propertype + " :"
+        li.classList.add("contorler-number-input")
         li.appendChild(label)
         li.appendChild(input)
         if (match[2]) {
-          const select = document.createElement('select')
+          const select = document.createElement("select")
           for (const unit of units) {
-            const option = document.createElement('option')
+            const option = document.createElement("option")
             option.value = unit
             option.text = unit
             if (unit === match[2]) {
@@ -1155,7 +1200,7 @@
           "justifyContent",
           "alignItems",
           "alignContent",
-          "flexFlow",
+          "flexFlow"
         ]
       ) {
         const div = document.createElement("div")
@@ -1188,8 +1233,13 @@
           "center",
           "baseline"
         ],
-        numberInputPropertypes = ['order', 'flex-grow', 'flex-shrink', 'flex-basis'],
-        inputPropertypes = ['flex'],
+        numberInputPropertypes = [
+          "order",
+          "flex-grow",
+          "flex-shrink",
+          "flex-basis"
+        ],
+        inputPropertypes = ["flex"]
       } = {}) {
         super(name)
         this.alignSelf = alignSelf
@@ -1212,42 +1262,49 @@
         const currentTarget = e.currentTarget
         const li = currentTarget.parentNode
         const itemController = li.parentNode
-        if (li.classList.contains('flex-basis') || li.classList.contains('flex-shrink') || li.classList.contains(
-            'flex-grow')) {
-          const flex = itemController.getElementsByClassName('flex')[0]
-          const input = flex.getElementsByTagName('input')[0]
-          input.value = this._getStyle(ele, 'flex')
+        if (
+          li.classList.contains("flex-basis") ||
+          li.classList.contains("flex-shrink") ||
+          li.classList.contains("flex-grow")
+        ) {
+          const flex = itemController.getElementsByClassName("flex")[0]
+          const input = flex.getElementsByTagName("input")[0]
+          input.value = this._getStyle(ele, "flex")
         }
       }
 
       _getControledNumberInput(ele, propertype) {
         const li = this._createControlNumberInput(ele, propertype)
         li.classList.add(propertype)
-        const input = li.getElementsByTagName('input')[0]
-        if (propertype === 'flex-grow' || propertype === 'flex-shrink' || propertype === 'flex-basis') {
+        const input = li.getElementsByTagName("input")[0]
+        if (
+          propertype === "flex-grow" ||
+          propertype === "flex-shrink" ||
+          propertype === "flex-basis"
+        ) {
           input.min = 0
         }
-        let unit = 'px'
-        if (propertype === 'flex-basis') {
-          const select = li.getElementsByTagName('select')[0]
-          select.onchange = (e) => {
-            if (e.currentTarget.value !== 'auto') {
+        let unit = "px"
+        if (propertype === "flex-basis") {
+          const select = li.getElementsByTagName("select")[0]
+          select.onchange = e => {
+            if (e.currentTarget.value !== "auto") {
               input.type = "number"
               input.value = input.value ? input.value : 0
               unit = e.currentTarget.value
               this._setStyle(ele, propertype, input.value + unit)
             } else {
-              input.type = 'text'
-              input.value = 'auto'
-              this._setStyle(ele, propertype, 'auto')
+              input.type = "text"
+              input.value = "auto"
+              this._setStyle(ele, propertype, "auto")
             }
             this._updateFlex(ele, e)
           }
         }
-        input.oninput = (e) => {
+        input.oninput = e => {
           const currentTarget = e.currentTarget
           let value = currentTarget.value
-          if (propertype === 'flex-basis') {
+          if (propertype === "flex-basis") {
             this._setStyle(ele, propertype, value + unit)
           } else {
             this._setStyle(ele, propertype, value)
@@ -1260,27 +1317,36 @@
       _getControledInput(ele, propertype) {
         const li = this._createControlInput(ele, propertype)
         li.classList.add(propertype)
-        const input = li.getElementsByTagName('input')[0]
-        if (propertype === 'flex') {
-          input.onchange = (e) => {
+        const input = li.getElementsByTagName("input")[0]
+        if (propertype === "flex") {
+          input.onchange = e => {
             let value = e.currentTarget.value
             this._setStyle(ele, propertype, value)
             const parentNode = li.parentNode
-            let flexBasis = parentNode.getElementsByClassName('flex-basis')[0]
-            let flexGrow = parentNode.getElementsByClassName('flex-grow')[0]
-            let flexShrink = parentNode.getElementsByClassName('flex-shrink')[0]
-            flexGrow.getElementsByTagName('input')[0].value = this._getStyle(ele, 'flex-grow')
-            flexShrink.getElementsByTagName('input')[0].value = this._getStyle(ele, 'flex-shrink')
-            let flexBasisProperTypeValue = this._getStyle(ele, 'flex-basis')
-            let flexBasisInput = flexBasis.getElementsByTagName('input')[0]
-            let flexBasisSelect = flexBasis.getElementsByTagName('select')[0]
-            let match = flexBasisProperTypeValue.toString().match(/([.\d]*)(.*)/)
-            if (match[2] === 'auto') {
-              flexBasisInput.type = 'text'
-              flexBasisInput.value = 'auto'
-              flexBasisSelect.value = 'auto'
+            let flexBasis = parentNode.getElementsByClassName("flex-basis")[0]
+            let flexGrow = parentNode.getElementsByClassName("flex-grow")[0]
+            let flexShrink = parentNode.getElementsByClassName(
+              "flex-shrink"
+            )[0]
+            flexGrow.getElementsByTagName("input")[0].value = this._getStyle(
+              ele,
+              "flex-grow"
+            )
+            flexShrink.getElementsByTagName(
+              "input"
+            )[0].value = this._getStyle(ele, "flex-shrink")
+            let flexBasisProperTypeValue = this._getStyle(ele, "flex-basis")
+            let flexBasisInput = flexBasis.getElementsByTagName("input")[0]
+            let flexBasisSelect = flexBasis.getElementsByTagName("select")[0]
+            let match = flexBasisProperTypeValue
+              .toString()
+              .match(/([.\d]*)(.*)/)
+            if (match[2] === "auto") {
+              flexBasisInput.type = "text"
+              flexBasisInput.value = "auto"
+              flexBasisSelect.value = "auto"
             } else {
-              flexBasisInput.type = 'number'
+              flexBasisInput.type = "number"
               flexBasisSelect.value = match[2]
               flexBasisInput.value = match[1]
             }
@@ -1293,7 +1359,9 @@
         const div = document.createElement("div")
         div.classList.add(this.name)
         for (const numberInputPropertype of this.numberInputPropertypes) {
-          div.appendChild(this._getControledNumberInput(this.ele, numberInputPropertype))
+          div.appendChild(
+            this._getControledNumberInput(this.ele, numberInputPropertype)
+          )
         }
         for (const inputPropertype of this.inputPropertypes) {
           div.appendChild(this._getControledInput(this.ele, inputPropertype))
@@ -1332,14 +1400,14 @@
       document.body.appendChild(div)
       let boundingClientRect = div.getBoundingClientRect()
       if (boundingClientRect.right > clientWidth) {
-        let left = parseFloat(itemController._getStyle(div, 'left'))
+        let left = parseFloat(itemController._getStyle(div, "left"))
         let x = boundingClientRect.right - clientWidth
-        itemController._setStyle(div, 'left', left - x + 'px')
+        itemController._setStyle(div, "left", left - x + "px")
       }
       if (boundingClientRect.bottom > clientHeight) {
-        let top = parseFloat(itemController._getStyle(div, 'top'))
+        let top = parseFloat(itemController._getStyle(div, "top"))
         let y = boundingClientRect.bottom - clientHeight
-        itemController._setStyle(div, 'top', top - y + 'px')
+        itemController._setStyle(div, "top", top - y + "px")
       }
       let isLeave = false
       div.onmouseleave = function (e) {
@@ -1360,20 +1428,110 @@
         div.onmousemove = function (e) {
           let pageX = e.pageX
           let pageY = e.pageY
-          itemController._setStyle(div, 'top', pageY - y + 'px')
-          itemController._setStyle(div, 'left', pageX - x + 'px')
+          itemController._setStyle(div, "top", pageY - y + "px")
+          itemController._setStyle(div, "left", pageX - x + "px")
         }
         div.onmouseup = function (e) {
           div.onmousemove = null
         }
       }
     }
-    document.documentElement.addEventListener(
-      "click",
-      itemControlHandler,
-      false
-    )
+
+    function itemControlTouchHandler(e) {
+      const target = e.target
+      if (!target.classList.contains("item")) {
+        return false
+      }
+      itemController.ele = target
+      const div = itemController.render()
+      const touche = e.touches[0]
+      let pageX = touche.pageX
+      let pageY = touche.pageY
+      let doc = document.documentElement
+      let clientHeight = doc.clientHeight
+      let clientWidth = doc.clientWidth
+      itemController._setStyle(div, "left", pageX - 10 + "px")
+      itemController._setStyle(div, "top", pageY - 10 + "px")
+      document.body.appendChild(div)
+      let boundingClientRect = div.getBoundingClientRect()
+      if (boundingClientRect.right > clientWidth) {
+        let left = parseFloat(itemController._getStyle(div, "left"))
+        let x = boundingClientRect.right - clientWidth
+        itemController._setStyle(div, "left", left - x + "px")
+      }
+      if (boundingClientRect.bottom > clientHeight) {
+        let top = parseFloat(itemController._getStyle(div, "top"))
+        let y = boundingClientRect.bottom - clientHeight
+        itemController._setStyle(div, "top", top - y + "px")
+      }
+      let isLeave = true
+
+      function leaveBySeconds(time = 2000) {
+        setTimeout(() => {
+          if (isLeave) {
+            div.parentNode.removeChild(div)
+          }
+        }, time)
+      }
+      leaveBySeconds()
+      
+      for (const input of div.getElementsByTagName('input')) {
+        input.onblur = function () {
+          isLeave = true
+          leaveBySeconds(4000)
+        }
+        input.onfocus = function () {
+          isLeave = false
+          return false
+        }
+      }
+      for (const select of div.getElementsByTagName('select')) {
+        select.addEventListener('focus',function () {
+          isLeave = false
+          return false
+        },false)
+        select.onblur = function () {
+          isLeave = true
+          leaveBySeconds(4000)
+        }
+         
+      }
+
+      div.ontouchstart = function (e) {
+        isLeave = false
+        let rectBounding = div.getBoundingClientRect()
+        let touche = e.touches[0]
+        let x = touche.clientX - rectBounding.left
+        let y = touche.clientY - rectBounding.top
+        div.ontouchmove = function (e) {
+          let touche = e.touches[0]
+          let pageX = touche.pageX
+          let pageY = touche.pageY
+          itemController._setStyle(div, "top", pageY - y + "px")
+          itemController._setStyle(div, "left", pageX - x + "px")
+          e.preventDefault()
+        }
+        div.ontouchend = function (e) {
+          div.ontouchmove = null
+          isLeave = true
+          leaveBySeconds()
+        }
+      }
+    }
+    if ('ontouchstart' in document.body) {
+      document.documentElement.addEventListener(
+        "touchstart",
+        itemControlTouchHandler,
+        false
+      )
+    } else {
+      document.documentElement.addEventListener(
+        "click",
+        itemControlHandler,
+        false
+      )
+    }
   </script>
 </body>
 
-</html> 
+</html>
