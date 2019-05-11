@@ -961,7 +961,7 @@
         const label = document.createElement("label")
         const input = document.createElement("input")
         let value = this._getStyle(ele, propertype)
-        let match = value.toString().match(/([.\d]*)(.*)/)
+        let match = value.toString().match(/([-.\d]*)(.*)/)
         input.type = "number"
         if (!match[1]) {
           input.type = "text"
